@@ -43,7 +43,7 @@ def main(args_obj):
     print('Import network module: ', opt['network'])
 
     checkpoint, config = glob.glob(os.path.join(opt['flow_checkPoint'], '*.tar'))[0], \
-                         glob.glob(os.path.join(opt['flow_checkPoint'], '*.yaml'))[0]
+                         glob.glob(os.path.join(opt['flowCheckPoint'], '*.yaml'))[0]
     with open(config, 'r') as f:
         configs = yaml.full_load(f)
     opt['flow_config'] = configs
