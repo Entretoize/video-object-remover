@@ -171,4 +171,3 @@ class VideoBasedDataset(Dataset):
                     item = torch.from_numpy(np.transpose(item, (3, 0, 1, 2))).float()
                 data_list[key] = item
         return data_list
-

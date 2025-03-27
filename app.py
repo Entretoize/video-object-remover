@@ -32,14 +32,13 @@ pretrained_path1 = join(exp_path, 'SiamMask_DAVIS.pth')
 
 print(sys.path)
 
-torch.set_grad_enabled(False)
-
-# init SiamMask
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-cfg = load_config(SimpleNamespace(config=join(exp_path, 'config_davis.json')))
-siammask = Custom(anchors=cfg['anchors'])
-siammask = load_pretrain(siammask, pretrained_path1)
-siammask = siammask.eval().to(device)
+with torch.no_grad():
+    # init SiamMask
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    cfg = load_config(SimpleNamespace(config=join(exp_path, 'config_davis.json')))
+    siammask = Custom(anchors=cfg['anchors'])
+    siammask = load_pretrain(siammask, pretrained_path1)
+    siammask = siammask.eval().to(device)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--opt', default=os.path.abspath(join(project_name, 'FGT_codes', 'tool','configs','object_removal.yaml')),
